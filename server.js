@@ -1,12 +1,15 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 
+
 app.use(express.json())
+app.use(cors({
+    origin: ['http://localhost:5500', 'http://127.0.0.1:5500']
+}))
 
 const alunos = [
-    {"nome": "ale", "idade": 17},
-    {"nome": "emmy", "idade": 17},
-    {"nome": "bruno", "idade": 17}
+    {"nome": "", "url": ""}
 ]
 
 app.get('/alunos', (req, res) => {
@@ -14,8 +17,8 @@ app.get('/alunos', (req, res) => {
 })
 
 app.post('/alunos', (req, res) => {
-    const { nome, idade } = req.body
-    res.send(`Nome: ${nome} Idade: ${idade}`)
+    const { nome, url } = req.body
+    res.json({"nome": nome, "url": url})
 })
 
 app.listen(3000, () => {
