@@ -1,12 +1,13 @@
-let mysql = require('mysql');
+const mysql = require('mysql2/promise');
 
-let con = mysql.createConnection({
+const db = mysql.createPool({
     host: "localhost",
-    user: "alessandrasilv",
-    password: "1234"
+    port: 3306,
+    user: "root",
+    password: "1234",
+    database: 'aula',
+    waitForConnections: true,
+    connectionLimit: 10,
 });
 
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!")
-});
+module.exports = db;
